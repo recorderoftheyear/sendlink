@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>SendLink</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/assets/desktop.js"></script>
+</head>
+<body class="desktop">
+  <header class="bar">
+    <span class="brand"><img src="/icon.svg" alt="" width="22" height="22">SendLink</span>
+    <span id="status" class="status" data-testid="status" data-state="connecting">
+      <span id="status-peer" class="status-peer"></span>
+      <span id="status-dot" class="dot off"></span>
+      <span id="status-text" class="status-text"></span>
+    </span>
+  </header>
+
+  <main>
+    <section id="view-loading" class="center"><p class="muted">Loading…</p></section>
+
+    <section id="view-pair" class="center" hidden>
+      <h1 class="onboard">Send links from your phone<br>to this computer.</h1>
+      <div class="qr-box"><canvas id="qr" data-testid="qr" aria-label="Code to scan with your phone"></canvas></div>
+      <p class="scan-hint">Scan with your phone</p>
+      <p class="muted small">No camera? On your phone, open <strong id="pair-host"></strong>/m and enter code:</p>
+      <p id="pair-code" class="code" data-testid="pair-code"></p>
+      <p id="pair-expiry" class="muted small"></p>
+      <button id="pair-cancel" class="btn" hidden>Cancel</button>
+    </section>
+
+    <section id="view-inbox" hidden>
+      <div id="welcome" class="welcome" hidden data-testid="welcome">
+        <p class="welcome-title">✓ Phone connected</p>
+        <p>You're ready.</p>
+        <p class="muted">On your phone: <strong>Share</strong> any link → <strong>SendLink</strong></p>
+      </div>
+
+      <h2>Received</h2>
+      <ul id="links" class="links" data-testid="links"></ul>
+      <p id="empty" class="muted empty">Links you send appear here.<br>On your phone: Share any link → SendLink</p>
+
+      <div id="notify-card" class="card" hidden data-testid="notify-card">
+        <p class="card-title">Get notified when a link arrives</p>
+        <p class="muted small">Even when this tab is in the background.</p>
+        <div class="row">
+          <button id="notify" class="btn primary" type="button">Turn on notifications</button>
+          <button id="notify-later" class="btn ghost" type="button">Not now</button>
+        </div>
+      </div>
+
+      <section class="devices" aria-labelledby="devices-title">
+        <h2 id="devices-title">Devices</h2>
+        <p class="device-row">
+          <span>This computer: <strong id="this-device"></strong></span>
+          <button id="rename" class="btn ghost small" type="button" aria-label="Rename this computer">Rename</button>
+        </p>
+        <ul id="peers" class="peers"></ul>
+        <div class="row">
+          <button id="pair-another" class="btn small" type="button">Connect another phone</button>
+          <span id="notify-status" class="muted small"></span>
+        </div>
+      </section>
+    </section>
+
+    <section id="view-error" class="center" hidden>
+      <h1>Can't reach SendLink</h1>
+      <p id="error-text" class="muted">Check your internet connection. Retrying…</p>
+      <button id="retry" class="btn primary">Try again</button>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+{
+  "name": "sendlink",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Send a link from your phone to your computer in one tap.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs --watch",
+    "start": "node dist/server.js",
+    "backup": "node scripts/backup.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test",
+    "validate": "npm run lint && npm run typecheck && npm test && npm run build && npm run e2e"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.8.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@playwright/test": "^1.50.1",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.13.1",
+    "@types/qrcode": "^1.5.5",
+    "esbuild": "^0.25.0",
+    "eslint": "^9.20.0",
+    "globals": "^15.14.0",
+    "qrcode": "^1.5.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0",
+    "vitest": "^3.0.5"
+  }
+}

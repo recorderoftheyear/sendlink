@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="referrer" content="no-referrer">
+  <meta name="theme-color" content="#111111">
+  <title>SendLink</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/assets/mobile.js"></script>
+</head>
+<body class="mobile">
+  <header class="bar">
+    <span class="brand"><img src="/icon.svg" alt="" width="22" height="22">SendLink</span>
+  </header>
+
+  <main>
+    <section id="view-loading" class="center"><p class="muted">Loading…</p></section>
+
+    <!-- Not connected to any computer yet (or disconnected) -->
+    <section id="view-connect" hidden>
+      <h1>Connect to your computer</h1>
+      <p id="connect-notice" class="notice" role="alert" hidden></p>
+      <p class="muted">On your computer, open <strong id="connect-host"></strong>.
+        Then scan the code it shows with your phone's camera.</p>
+      <p id="pending-share" class="muted small" hidden>Your link will be ready to send once you're connected.</p>
+      <p class="muted small label">No camera? Enter the code shown on your computer:</p>
+      <form id="code-form" class="stack" autocomplete="off">
+        <input id="code-input" class="field code-field" placeholder="XXXX-XXXX" maxlength="9"
+               autocapitalize="characters" spellcheck="false" aria-label="Code">
+        <button class="btn primary big" type="submit">Connect</button>
+      </form>
+      <p id="connect-error" class="feedback error" role="alert"></p>
+    </section>
+
+    <!-- Main screen: from the Share menu (share mode) or opened directly -->
+    <section id="view-send" hidden>
+      <p id="notice" class="notice ok" role="status" hidden data-testid="notice"></p>
+      <p id="offline-banner" class="notice warn" role="status" hidden data-testid="offline-banner"></p>
+
+      <p class="label">Send to</p>
+      <div id="dest-list" class="dest-list" role="radiogroup" aria-label="Send to"></div>
+      <div id="dest-single" class="dest-single" hidden data-testid="dest-single"></div>
+      <select id="dest-select" class="field dest-select" aria-label="Send to" data-testid="dest-select" hidden></select>
+
+      <form id="send-form" class="stack" autocomplete="off">
+        <div id="shared-preview" class="shared-preview" hidden>
+          <span id="shared-url" class="shared-url" data-testid="shared-url"></span>
+          <button id="edit-url" class="btn ghost small" type="button">Edit</button>
+        </div>
+        <div id="url-row" class="url-row">
+          <input id="url-input" class="field" type="text" inputmode="url" placeholder="Paste a link…"
+                 autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Link" data-testid="url-input">
+          <button id="paste-btn" class="btn" type="button" hidden>Paste</button>
+        </div>
+        <button id="send-btn" class="btn primary big" type="submit">Send →</button>
+      </form>
+      <p id="feedback" class="feedback" role="status" data-testid="feedback"></p>
+
+      <div id="install-card" class="card" hidden data-testid="install-card">
+        <p class="card-title">Add SendLink to your phone</p>
+        <p class="muted small">This lets SendLink appear in Android's Share menu.</p>
+        <p id="install-manual" class="muted small" hidden>In your browser menu (⋮), tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p>
+        <div class="row">
+          <button id="install-btn" class="btn primary" type="button">Install SendLink</button>
+          <button id="install-later" class="btn ghost" type="button">Not now</button>
+        </div>
+      </div>
+      <div id="installed-card" class="card" hidden data-testid="installed-card">
+        <p class="card-title">✓ SendLink installed</p>
+        <p class="muted small">You can now use: <strong>Share → SendLink</strong></p>
+      </div>
+
+      <footer class="identity">
+        <p class="label">This phone</p>
+        <p class="self"><strong id="self-name" data-testid="self-name"></strong>
+          <button id="rename-btn" class="btn ghost small" type="button">Rename</button></p>
+        <button id="unpair-btn" class="btn ghost small" type="button">Disconnect from <span id="unpair-name"></span></button>
+      </footer>
+    </section>
+
+    <!-- Share mode, after sending -->
+    <section id="view-sent" class="center" hidden>
+      <p class="sent-check" aria-hidden="true">✓</p>
+      <p id="sent-title" class="sent-title" data-testid="sent-title"></p>
+      <p id="sent-note" class="muted small" data-testid="sent-note"></p>
+      <div class="stack">
+        <button id="sent-done" class="btn primary big" type="button">Done</button>
+        <button id="sent-another" class="btn ghost" type="button">Send another link</button>
+      </div>
+    </section>
+
+    <section id="view-unreachable" class="center" hidden>
+      <h1>Can't reach SendLink</h1>
+      <p class="muted">Check your internet connection.</p>
+      <button id="retry-btn" class="btn primary big" type="button">Try again</button>
+    </section>
+  </main>
+</body>
+</html>
